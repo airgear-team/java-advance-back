@@ -6,12 +6,13 @@ import org.springframework.web.client.RestTemplate;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import static org.example.seeder.SeedConstants.SEED_URL;
+
 public class TopicSeeder {
 
     public static void main(String[] args) {
 
         RestTemplate restTemplate = new RestTemplate();
-        String url = "http://localhost:8080/api/java/advance/topics";
 
         // LinkedHashMap щоб зберегти порядок
         Map<Long, String> topics = new LinkedHashMap<>();
@@ -36,7 +37,7 @@ public class TopicSeeder {
             HttpEntity<String> request = new HttpEntity<>(body, headers);
 
             try {
-                ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
+                ResponseEntity<String> response = restTemplate.postForEntity(SEED_URL, request, String.class);
                 System.out.println("Відправлено: " + name + " | id=" + id + " | Статус: " + response.getStatusCode());
             } catch (Exception e) {
                 System.err.println("Помилка при відправці " + name + ": " + e.getMessage());

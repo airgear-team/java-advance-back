@@ -11,6 +11,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import static org.example.seeder.SeedConstants.SEED_URL;
+
 public class QuestionSeeder {
 
     public static void main(String[] args) {
@@ -24,7 +26,6 @@ public class QuestionSeeder {
 
             // 2. Налаштовуємо REST-клієнт
             RestTemplate restTemplate = new RestTemplate();
-            String url = "http://localhost:8080/api/java/advance/questions";
 
             for (QuestionJson q : questions) {
                 QuestionCreateDTO dto = new QuestionCreateDTO();
@@ -39,7 +40,7 @@ public class QuestionSeeder {
                 HttpEntity<QuestionCreateDTO> request = new HttpEntity<>(dto, headers);
 
                 try {
-                    ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
+                    ResponseEntity<String> response = restTemplate.postForEntity(SEED_URL, request, String.class);
                     System.out.println("Відправлено: " + q.getQuestionText() + " | Статус: " + response.getStatusCode());
                 } catch (Exception e) {
                     System.err.println("Помилка при відправці: " + q.getQuestionText() + " | " + e.getMessage());

@@ -32,13 +32,17 @@ public class QuestionService {
     }
 
     public QuestionDTO createQuestion(QuestionCreateDTO dto) {
-        // Перевірка, чи існує Topic
-        topicRepository.findById(dto.getTopicId())
+        Topic topic = topicRepository.findById(dto.getTopicId())
                 .orElseThrow(() -> new RuntimeException("Topic not found"));
 
-        Question question = questionMapper.toEntity(dto);
+        Question question = new Question();
+        question.setQuestionText(dto.getQuestionText());
+        question.setAnswer(dto.getAnswer());
+        question.setTopic(topic);
+
         return questionMapper.toDTO(questionRepository.save(question));
     }
+
 
     public List<QuestionDTO> getAllQuestions() {
         return questionRepository.findAll()
