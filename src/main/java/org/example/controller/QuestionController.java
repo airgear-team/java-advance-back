@@ -58,7 +58,7 @@ public class QuestionController {
     }
 
     @GetMapping("/by-topic/{topicId}")
-    public ResponseEntity<List<QuestionDTO>> getQuestionsByTopic(@PathVariable Long topicId) {
+    public ResponseEntity<List<QuestionDTO>> getQuestionsByTopic(@PathVariable("topicId") Long topicId) {
         return ResponseEntity.ok(questionService.getQuestionsByTopicId(topicId));
     }
 
