@@ -37,7 +37,7 @@ public class TopicSeeder {
             HttpEntity<String> request = new HttpEntity<>(body, headers);
 
             try {
-                ResponseEntity<String> response = restTemplate.postForEntity(SEED_URL, request, String.class);
+                ResponseEntity<String> response = restTemplate.postForEntity(SEED_URL + "/topics", request, String.class);
                 System.out.println("Відправлено: " + name + " | id=" + id + " | Статус: " + response.getStatusCode());
             } catch (Exception e) {
                 System.err.println("Помилка при відправці " + name + ": " + e.getMessage());

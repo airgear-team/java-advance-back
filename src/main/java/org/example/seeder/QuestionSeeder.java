@@ -40,7 +40,7 @@ public class QuestionSeeder {
                 HttpEntity<QuestionCreateDTO> request = new HttpEntity<>(dto, headers);
 
                 try {
-                    ResponseEntity<String> response = restTemplate.postForEntity(SEED_URL, request, String.class);
+                    ResponseEntity<String> response = restTemplate.postForEntity(SEED_URL + "/questions", request, String.class);
                     System.out.println("Відправлено: " + q.getQuestionText() + " | Статус: " + response.getStatusCode());
                 } catch (Exception e) {
                     System.err.println("Помилка при відправці: " + q.getQuestionText() + " | " + e.getMessage());
