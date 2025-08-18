@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,6 +23,7 @@ public class QuestionService {
     private final QuestionRepository questionRepository;
     private final TopicRepository topicRepository;
     private final QuestionMapper questionMapper;
+    private final Random random = new Random();
 
     public QuestionService(QuestionRepository questionRepository,
                            TopicRepository topicRepository,
@@ -95,5 +97,10 @@ public class QuestionService {
                 .toList();
     }
 
+
+    public Optional<QuestionDTO> getRandomQuestionByTopicId(Long topicId) {
+        return questionRepository.findRandomByTopicId(topicId)
+                .map(questionMapper::toDTO);
+    }
 
 }

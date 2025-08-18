@@ -62,4 +62,11 @@ public class QuestionController {
         return ResponseEntity.ok(questionService.getQuestionsByTopicId(topicId));
     }
 
+    @GetMapping("/random/{topicId}")
+    public ResponseEntity<QuestionDTO> getRandomQuestionByTopic(@PathVariable("topicId") Long topicId) {
+        return questionService.getRandomQuestionByTopicId(topicId)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
 }
